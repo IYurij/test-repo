@@ -1,5 +1,6 @@
 // node index.js num num <operation>
 const { add } = require('./add.js');
+const { divide } = require('./divide.js');
 
 let firstNum = Number(process.argv[2]);
 let secondNum = Number(process.argv[3]);
@@ -15,7 +16,11 @@ if ( isNaN(firstNum) || isNaN(secondNum)) {
             res = add(firstNum, secondNum);
             break;
         case('divide'):
-            //
+            if (secondNum === 0) {
+                console.log('Dividing by zero.');
+                break;
+            }
+            res = divide(firstNum, secondNum);
             break;
         case('minus'):
             //
