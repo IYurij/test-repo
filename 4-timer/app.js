@@ -15,13 +15,13 @@ function argsToSec( args ) {
         let value = parseInt(i);
         switch (period) {
             case ("h"):
-                t = t + (value * 60 * 60);
+                t += value * 60 * 60;
                 break;
             case ("m"):
-                t = t + (value * 60);
+                t += value * 60;
                 break;
             case ("s"):
-                t = t + value;
+                t += value;
                 break;
             default:
                 console.log('Incorrect parameter!');
@@ -37,4 +37,4 @@ function endTimer() {
 
 timerPeriod = argsToSec( args );
 
-setTimeout(endTimer, timerPeriod);
+setTimeout(endTimer, timerPeriod * 1000);
