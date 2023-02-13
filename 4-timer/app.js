@@ -1,40 +1,36 @@
-let hh = process.argv[2];
-let mm = process.argv[3];
-let ss = process.argv[4];
+const [_, __, hh, mm, ss] = process.argv;
 
-let args = [hh, mm, ss];
-
-function argsToSec( args ) {
+function argsToSec( ...args ) {
     if (args.length > 3) {
         return;
     }
 
-    t = 0;
+    let timeToEnd = 0;
     for (i of args ) {
         let period = i.split('').slice(-1)[0];
         let value = parseInt(i);
         switch (period) {
             case ("h"):
-                t += value * 60 * 60;
+                timeToEnd += value * 60 * 60;
                 break;
             case ("m"):
-                t += value * 60;
+                timeToEnd += value * 60;
                 break;
             case ("s"):
-                t += value;
+                timeToEnd += value;
                 break;
             default:
                 console.log('Incorrect parameter!');
         }
     }
-    
-    return t;
+
+    return timeToEnd;
 }
 
 function endTimer() {
     console.log('Timer finished');
 }
 
-timerPeriod = argsToSec( args );
+timerPeriod = argsToSec(hh, mm, ss);
 
 setTimeout(endTimer, timerPeriod * 1000);
