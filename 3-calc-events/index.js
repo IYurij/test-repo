@@ -22,22 +22,14 @@ myEmitter.on('result', (res) => {
 
 const calcFunc = (firstNum, secondNum, operation) => {
     let res;
-    if (operation === 'add') {
-        res = add(firstNum, secondNum);
-    } else if (operation === 'divide') {
-        if (secondNum === 0) {
-            res = 'Dividing by zero.';
-        } else {
-            res = divide(firstNum, secondNum);
-        }
-    } else if (operation === 'minus') {
-        res = minus(firstNum, secondNum);
+
+    funcs = {
+        add: add(firstNum, secondNum),
+        divide: divide(firstNum, secondNum),
+        minus: minus(firstNum, secondNum),
+        multiply: multiply(firstNum, secondNum)
     }
-    else if (operation === 'multiply') {
-        res = multiply(firstNum, secondNum);
-    } else {
-        res = `Operation ${operation} not implemented.`;
-    }
+    res = funcs[operation];
 
     myEmitter.emit('result', res);
 }
