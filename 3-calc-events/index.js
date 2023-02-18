@@ -11,7 +11,7 @@ let operation = process.argv[4];
 
 
 if ( isNaN(firstNum) || isNaN(secondNum)) {
-    console.log('Operation parameter is not a number. Try again.');
+    throw new Error('Operation parameter is not a number. Try again.');
 };
 
 const myEmitter = new EventEmmiter();
@@ -21,17 +21,21 @@ myEmitter.on('result', (res) => {
 });
 
 const calcFunc = (firstNum, secondNum, operation) => {
-    let res;
-
-    funcs = {
-        add: add(firstNum, secondNum),
-        divide: divide(firstNum, secondNum),
-        minus: minus(firstNum, secondNum),
-        multiply: multiply(firstNum, secondNum)
+    
+    const operations = {
+        add: add,
+        divide: divide,
+        minus: minus,
+        multiply: multiply
     }
-    res = funcs[operation];
 
-    myEmitter.emit('result', res);
+    try {
+        const res = operations[operation](firstNum, secondNum);
+        myEmitter.emit('result', res);
+    }
+    catch {
+        throw new Error('One of arguments is wrong. Try again.');
+    }
 }
 
 
