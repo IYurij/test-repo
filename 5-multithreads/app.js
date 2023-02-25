@@ -41,11 +41,9 @@ const workerFunction = (array, id) => {
 const multithreadFunction = async (arrs) => {
     try {
         performance.mark('worker start');
-        let funcs = [];
-        for (let i = 0; i < arrs.length; i++) {
-            funcs.push(workerFunction(arrs[i], i));
-        };
         
+        let funcs = [];
+        arrs.map((value, index) => funcs.push(workerFunction(value, index)));
         await Promise.all(funcs);
         
         performance.mark('worker end');
